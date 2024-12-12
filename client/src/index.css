@@ -1,0 +1,267 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+      --color-primary: 255 115 179;
+      --color-secondary: 111 114 185;
+      /* ... */
+    }
+  }
+
+
+.contain {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+.first-h h1 {
+    font-size: 30px;
+    color: #ABBED1;
+}
+.second-h h1 {
+    font-size: 40px;
+    color: #89a5c0;
+}
+.c {
+    align-items: center;
+}
+.one {
+    font-size: 20px;
+    font-weight: 700;
+ 
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.containerr {
+    width: 98vw;
+    height: 80vh;
+    /* border: 1px solid black; */
+    display: flex;
+
+}
+
+.pg-l {
+  width: 40vw;
+    height: auto;
+
+}
+.pg-l img {
+    height: 400px;
+}
+.pg-r {
+    width: 70vw;
+    /* border: 1px solid black; */
+    display: flex;
+   align-items: center;
+    /* flex-direction: column; */
+}
+.pg-r h1 {
+    font-size: 40px;
+    font-weight: 600;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+.containerr {
+    width: 100vw;
+    height: 80vh;
+    /* border: 1px solid black; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+.search {
+    width: 100vw;
+    height: 40vh;
+    /* background-color: wheat; */
+    display: flex;
+    align-items: center;
+    background-image: url(./assets/star-magic.jpg);
+    opacity: 80%;
+
+}
+.form {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    margin-left: 10%;
+}
+.rc {
+    width: 70%;
+    border-radius: 40px;
+    height: 80%;
+    margin: 0 auto;
+    /* background-color: black; */
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    /* opacity: 80%; */
+    backdrop-filter: blur(1px) saturate(80%);
+    -webkit-backdrop-filter: blur(1px) saturate(80%);
+    background-color: rgba(17, 25, 40, 0.75);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    
+
+}
+
+.teachercard {
+    backdrop-filter: blur(1px) saturate(80%);
+    -webkit-backdrop-filter: blur(1px) saturate(80%);
+    background-color: rgba(17, 25, 40, 0.75);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+}
+.rc h2 {
+    color: white;
+    font-size: 40px;
+
+}
+.pg-l {
+  width: 40vw;
+    height: auto;
+
+}
+.pg-l img {
+    height: 400px;
+}
+.pg-r {
+    width: 70vw;
+    /* border: 1px solid black; */
+    display: flex;
+   align-items: center;
+    /* flex-direction: column; */
+}
+.pg-r h1 {
+    font-size: 40px;
+    font-weight: 600;
+}
+.container-two {
+    width: 100vw;
+    height: 70vh;
+    /* border: 1px solid black; */
+}
+
+.info-num {
+    width: 100vw;
+    height: 20vh;
+    /* border: 1px solid yellow; */
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.data h2{
+font-size: 20px;
+font-weight: 600;
+opacity: 70%;
+}
+.wwd {
+    width: 70vw;
+    height: 60%;
+    /* border: 1px solid black; */
+    margin: 0 auto;
+    background-image: url(./assets/bricks.jpg);
+    /* opacity: 40%; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ 
+}
+.svg{
+    position: relative;
+    z-index: 1;
+}
+
+.wwd-data {
+    width: 70%;
+}
+#sp {
+    margin: 0 auto;
+    position: relative;
+    left: 30%;
+    font-size: 40px;
+}
+.container-three {
+    width: 100%;
+    background-image: url(./assets/faces.jpg);
+    background-size: cover;
+    background-repeat: repeat;
+    height: 90vh;
+    position: relative;
+    z-index: 11;
+}
+#upr {
+    width:100%;
+    height: 100%;
+    background-color: black;
+    opacity: 84%;
+    position: relative;
+    z-index:1;
+    /* display: inline-block; */
+}
+.cont {
+    position: relative;
+    z-index: 190;
+    
+  
+}
+
+.signup-card {
+    backdrop-filter: blur(25px) saturate(180%);
+    -webkit-backdrop-filter: blur(25px) saturate(180%);
+    background-color: white;
+    border-radius: 5px;
+    /* border: 1px solid rgba(255, 255, 255, 0.125); */
+}
+.overlay-image {
+    /* position: absolute; */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(./assets/contry.png);
+    background-size: cover;
+    background-position: center;
+    /* opacity: 0.7; Adjust opacity as needed */
+}
+
+
+.log {
+    width: 90%;
+    background-color: #003161;
+    border: 1px solid gray;
+    margin: 0 auto;
+    
+}
+.sp {
+    margin: 0 auto;
+    position: relative;
+    margin-left: 32%;
+}
+.t-center {
+    position: relative;
+    text-align: center;
+}
+.cen {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.form-con {
+    border: 1px solid black;
+    
+}
