@@ -26,6 +26,10 @@ const Login = () => {
   
       if (res.status === 200) {
         alert("Login successful");
+        const { token } = res.data;
+
+        // Store the token in localStorage for later use (e.g., in API requests)
+        localStorage.setItem("token", token);
   
         // Store session data
         localStorage.setItem("email", res.data.email);

@@ -5,6 +5,7 @@ import morgan from "morgan";
 import cors from "cors"; // Import CORS
 import connectDB from "./config/db.js"; // Import the database connection
 import authRoutes from "./routes/auth.js"; // Import your auth routes
+import userRoutes from "./routes/userRoutes.js";
 
 // Configure dotenv
 dotenv.config();
@@ -24,6 +25,9 @@ app.use(morgan("dev"));  // HTTP request logger
 
 // Set up routes
 app.use("/api/auth", authRoutes); // Your authentication routes
+
+
+app.use("/api/users", userRoutes); // Set user routes
 
 // REST API Route
 app.get("/", (req, res) => {

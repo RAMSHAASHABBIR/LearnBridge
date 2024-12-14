@@ -1,60 +1,47 @@
 import express from "express";
-import User from "../models/User.js";
-import { protect } from "../middleware/authMiddleware.js";
-
+import User from "../models/User.js"; // Assuming User is the user model
+import { protect } from "../middleware/auth.js"; // Adjust path as needed
 const router = express.Router();
 
-// Get Profile
-router.get("/profile", protect, async (req, res) => {
-  try {
-    const user = await User.findById(req.user.id).select("-password");
-    if (!user) return res.status(404).json({ message: "User not found" });
-    res.json(user);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server error" });
-  }
-});
+// Create Profile Endpoint
+router.post("/createProfile", protect, async (req, res) => {
+  const { phoneNumber, institutionName, city, degreeType, degreeName, startDate, endDate, association, speciality } = req.body;
 
-// Update Profile
-router.put("/updateProfile", protect, async (req, res) => {
-  const {
-    phoneNumber,
-    institutionName,
-    city,
-    degreeType,
-    degreeName,
-    startDate,
-    endDate,
-    association,
-    speciality,
-  } = req.body;
+  if (!phoneNumber || !institutionName || !city || !degreeType || !degreeName) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
 
   try {
     const user = await User.findById(req.user.id);
+
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
+
     if (user.role !== "Teacher") {
-      return res.status(403).json({ message: "Only teachers can update their profile." });
+      return res.status(403).json({ message: "Only teachers can create a profile" });
     }
 
-    user.phoneNumber = phoneNumber || user.phoneNumber;
-    user.institutionName = institutionName || user.institutionName;
-    user.city = city || user.city;
-    user.degreeType = degreeType || user.degreeType;
-    user.degreeName = degreeName || user.degreeName;
-    user.startDate = startDate || user.startDate;
-    user.endDate = endDate || user.endDate;
-    user.association = association || user.association;
-    user.speciality = speciality || user.speciality;
+    // Update user data with profile information
+    user.phoneNumber = phoneNumber || "";
+    user.institutionName = institutionName || "";
+    user.city = city || "";
+    user.degreeType = degreeType || "";
+    user.degreeName = degreeName || "";
+    user.startDate = startDate || "";
+    user.endDate = endDate || "";
+    user.association = association || "";
+    user.speciality = speciality || "";
 
     await user.save();
-    res.status(200).json({ message: "Profile updated successfully.", user });
+
+    return res.status(201).json({ message: "Profile created successfully", user });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Server error" });
+    return res.status(500).json({ message: "Server error, please try again later" });
   }
 });
 
-export default router;
+
+export default router; // Default export
+

@@ -5,10 +5,14 @@ import brick from '../assets/bricks.jpg'
 import raf from '../assets/rafiki.png'
 import Typed from 'typed.js';
 import TutSearch from "../components/tutsearch";
+import { Link } from "react-router-dom"; // Import Link to navigate to the profile page
 
 function Home() {
   const el = React.useRef(null);
 
+  // Get logged-in user data from localStorage (or any other auth mechanism you are using)
+  const user = JSON.parse(localStorage.getItem("user")); // Assuming the user is saved in localStorage as a JSON string
+  
   React.useEffect(() => {
     const typed = new Typed(el.current, {
       strings: ['Connecting Knowledge Seekers with Passionate Educators.',  'Find the Right Teacher for Your Learning Journey', 'Transforming Education with a Click.'],
@@ -16,16 +20,13 @@ function Home() {
     });
 
     return () => {
-     
+      typed.destroy(); // Clean up on component unmount
     };
   }, []);
 
   return (
     <Layout>
       <div className="containerr flex flex-nowrap">
-        {/* <div className="pg-l sm:w-100 lg:w-80">
-          <img src={raf} alt="image" />
-        </div> */}
         <div className="pg-r" data-aos="">
           <div className="midd">
             <h1 ref={el}>Welcome to Teachify – A New Way to Connect with Educators!</h1>
@@ -40,6 +41,15 @@ function Home() {
         </div>
       </div>
 
+      {/* Conditionally render Profile button based on user role */}
+      {user && user.role === "Teacher" && (
+        <div>
+          <Link to="/teacher/profile">
+            <button>View and Edit Profile</button>
+          </Link>
+        </div>
+      )}
+      
 
   
       <TutSearch />
