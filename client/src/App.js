@@ -18,7 +18,8 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/all-tutors" element={<TeacherCard />} />
         <Route path="/store" element={<Store />} />
-        <Route path="/teacher-profile" element={<TeacherProfileForm />} /> {/* Add this */}
+        <Route path="/teacher-profile" element={<TeacherProfileForm />} /> 
+        
       </Routes>
     </>
   );

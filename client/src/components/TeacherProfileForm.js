@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";  // Import useNavigate from react-router-dom
 
 const TeacherProfileForm = () => {
   const [formData, setFormData] = useState({
@@ -14,23 +15,28 @@ const TeacherProfileForm = () => {
     speciality: "",
   });
 
-  const [isProfileExisting, setIsProfileExisting] = useState(false); // Flag to track profile existence
+  const [isProfileExisting, setIsProfileExisting] = useState(false);
+
+  const navigate = useNavigate(); // Initialize navigate
 
   const fetchProfile = async () => {
     try {
-      const res = await axios.get("/api/users/profile", {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("You must be logged in!");
+        return;
+      }
+
+      const res = await axios.get("http://localhost:5000/api/users/profile", {
+        headers: { Authorization: `Bearer ${token}` },
       });
 
-      if (res.data && Object.keys(res.data).length > 0) {
+      if (res.data) {
         setFormData(res.data);
-        setIsProfileExisting(true); // Profile exists
-      } else {
-        setIsProfileExisting(false); // No profile found
+        setIsProfileExisting(true);
       }
     } catch (err) {
-      console.error("Error fetching profile data:", err);
-      setIsProfileExisting(false); // No profile means we need to create one
+      console.error("Error fetching profile data:", err.response?.data || err.message);
     }
   };
 
@@ -44,7 +50,6 @@ const TeacherProfileForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const token = localStorage.getItem("token");
     if (!token) {
       alert("You must be logged in!");
@@ -53,18 +58,22 @@ const TeacherProfileForm = () => {
 
     try {
       const endpoint = isProfileExisting
-        ? "/api/users/updateProfile"
-        : "/api/users/createProfile";
+        ? "http://localhost:5000/api/users/updateProfile"
+        : "http://localhost:5000/api/users/createProfile";
 
-      const method = isProfileExisting ? "put" : "post"; // Determine the method
+      const method = isProfileExisting ? "put" : "post";
 
       const res = await axios[method](endpoint, formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      alert(isProfileExisting ? "Profile updated successfully!" : "Profile created successfully!");
+      alert(res.data.message);
+
+      // Redirect to home page after submission
+      navigate("/"); // Redirect to home page
+
     } catch (err) {
-      console.error("Error submitting profile data:", err);
+      console.error("Error submitting profile data:", err.response?.data || err.message);
       alert("An error occurred. Please try again.");
     }
   };
@@ -144,7 +153,8 @@ const TeacherProfileForm = () => {
             type="submit"
             className="w-full py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500"
           >
-            Save Profile
+             {isProfileExisting ? "Update Profile" : "Create Profile"}
+            
           </button>
         </form>
       </div>
